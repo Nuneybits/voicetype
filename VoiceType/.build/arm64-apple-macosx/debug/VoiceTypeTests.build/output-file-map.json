@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/master.swiftdeps"
+  },
+  "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/Tests/VoiceTypeTests/VoiceTypeTests.swift": {
+    "dependencies": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/VoiceTypeTests.d",
+    "object": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/VoiceTypeTests.swift.o",
+    "swiftmodule": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/VoiceTypeTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/VoiceTypeTests.swiftdeps",
+    "diagnostics": "/Users/michaelnunez/Desktop/NEW-experiment-1/VoiceType/.build/arm64-apple-macosx/debug/VoiceTypeTests.build/VoiceTypeTests.dia"
+  }
+}
