@@ -2,13 +2,13 @@ import Foundation
 
 @MainActor
 final class DictationPipeline: ObservableObject {
-    let appState: AppState
+    var appState: AppState
     let hotkeyManager: HotkeyManager
     let audioCapture: AudioCapture
     let transcriptionEngine: TranscriptionEngine
     let textInjector: TextInjector
     let historyStore: HistoryStore
-    let modelManager: ModelManager
+    var modelManager: ModelManager
 
     init() {
         self.appState = AppState()
