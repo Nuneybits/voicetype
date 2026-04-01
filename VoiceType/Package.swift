@@ -21,13 +21,15 @@ let package = Package(
                 .swiftLanguageMode(.v5),
             ]
         ),
-        .testTarget(
-            name: "VoiceTypeTests",
-            dependencies: ["VoiceType"],
-            path: "Tests/VoiceTypeTests",
-            swiftSettings: [
-                .swiftLanguageMode(.v5),
-            ]
-        ),
+        // Tests require full Xcode (not just Command Line Tools)
+        // Uncomment when Xcode is installed:
+        // .testTarget(
+        //     name: "VoiceTypeTests",
+        //     dependencies: ["VoiceType"],
+        //     path: "Tests/VoiceTypeTests",
+        //     swiftSettings: [
+        //         .swiftLanguageMode(.v5),
+        //     ]
+        // ),
     ]
 )

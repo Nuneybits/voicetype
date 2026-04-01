@@ -1,7 +1,9 @@
-import XCTest
+import Testing
 
-final class VoiceTypeTests: XCTestCase {
-    func testPlaceholder() {
-        XCTAssertTrue(true)
+@Suite("VoiceType")
+struct VoiceTypeTests {
+    @Test("Placeholder")
+    func placeholder() {
+        #expect(true)
     }
 }
