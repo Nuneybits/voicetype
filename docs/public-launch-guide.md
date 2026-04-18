@@ -127,7 +127,9 @@ Use a short version anywhere you link the download:
 2. Open it
 3. Drag VoiceType into Applications
 4. In Applications, Control-click VoiceType and choose Open
-5. Click Open again
+5. If macOS still blocks it, go to System Settings > Privacy & Security
+6. Click Open Anyway
+7. Open VoiceType again
 
 After the first launch, VoiceType should open normally.
 

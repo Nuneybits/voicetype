@@ -1,0 +1,28 @@
+VoiceType v0.1.x
+Install Instructions
+
+VoiceType is safe to use, but this early release is not yet fully notarized by Apple.
+Because of that, macOS may block it the first time you try to open it.
+
+Normal install:
+1. Open the DMG
+2. Drag VoiceType.app into Applications
+3. Open Applications
+4. Hold Control and click VoiceType
+5. Choose Open
+
+If macOS still blocks it:
+1. Open System Settings
+2. Go to Privacy & Security
+3. Scroll to the Security section
+4. Look for the message that VoiceType was blocked
+5. Click Open Anyway
+6. Return to Applications and open VoiceType again
+
+Important:
+- You may need to try opening the app once before the Open Anyway button appears.
+- After the first successful launch, VoiceType should open normally.
+- This warning is caused by Apple security checks on unsigned or not-yet-notarized apps.
+
+Project page:
+https://github.com/Nuneybits/voicetype

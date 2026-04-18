@@ -57,18 +57,27 @@ The simplest way to get VoiceType is to download the latest `.dmg` from GitHub R
 After downloading:
 
 1. Open the `.dmg` file.
-2. Drag `VoiceType.app` into the `Applications` folder.
-3. Open `Applications` and launch VoiceType.
+2. Read `INSTALL FIRST.txt` if you want the shortest explanation of the macOS warning.
+3. Drag `VoiceType.app` into the `Applications` folder.
+4. Open `Applications` and launch VoiceType.
 
 If macOS warns you because the app is from the internet, that is expected for this early release. The warning is caused by Apple security checks on unsigned or not-yet-notarized apps, not by the DMG itself.
 
-To open it:
+First try this:
 
 1. In `Applications`, hold `Control` and click `VoiceType.app`
 2. Choose `Open`
 3. Click `Open` again in the confirmation dialog
 
-If needed, you can also go to `System Settings > Privacy & Security` and choose `Open Anyway`.
+If macOS still blocks the app:
+
+1. Open `System Settings`
+2. Go to `Privacy & Security`
+3. Scroll to the `Security` section
+4. Click `Open Anyway`
+5. Return to `Applications` and open VoiceType again
+
+You may need to try opening the app once before the `Open Anyway` button appears.
 
 ## Install Notes
 
@@ -80,7 +89,9 @@ For most people, the correct install flow is:
 4. Open `Applications`
 5. Control-click `VoiceType`
 6. Choose `Open`
-7. Click `Open` again
+7. If macOS still blocks the app, go to `System Settings > Privacy & Security`
+8. Click `Open Anyway`
+9. Return to `Applications` and open VoiceType again
 
 After the first successful launch, you should be able to open the app normally.
 

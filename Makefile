@@ -6,6 +6,7 @@ APP_CONTENTS := $(APP_BUNDLE)/Contents
 APP_BINARY := $(APP_CONTENTS)/MacOS/$(APP_NAME)
 APP_RESOURCES := $(APP_CONTENTS)/Resources
 ICON_FILE := VoiceType/Assets/AppIcon.icns
+DMG_INSTALL_NOTE := docs/INSTALL FIRST.txt
 SIGN_IDENTITY ?= -
 
 build:
@@ -38,6 +39,7 @@ dmg: bundle
 	@rm -rf dist/dmg
 	@mkdir -p dist/dmg
 	@cp -R $(APP_BUNDLE) dist/dmg/$(APP_NAME).app
+	@cp "$(DMG_INSTALL_NOTE)" "dist/dmg/INSTALL FIRST.txt"
 	@sh scripts/create_applications_alias.sh "$(PWD)/dist/dmg"
 	@rm -f dist/$(APP_NAME).dmg
 	@hdiutil create -volname "$(APP_NAME)" -srcfolder dist/dmg -ov -format UDZO dist/$(APP_NAME).dmg
