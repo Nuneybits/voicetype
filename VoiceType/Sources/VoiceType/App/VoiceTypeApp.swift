@@ -2,10 +2,14 @@ import SwiftUI
 
 @main
 struct VoiceTypeApp: App {
-    @StateObject private var pipeline = DictationPipeline()
     @StateObject private var settings = UserSettings()
+    @StateObject private var pipeline: DictationPipeline
 
-    @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "onboardingComplete")
+    init() {
+        let s = UserSettings()
+        _settings = StateObject(wrappedValue: s)
+        _pipeline = StateObject(wrappedValue: DictationPipeline(settings: s))
+    }
 
     var body: some Scene {
         MenuBarExtra {
@@ -17,15 +21,6 @@ struct VoiceTypeApp: App {
 
         Settings {
             SettingsView(settings: settings, modelManager: pipeline.modelManager)
-        }
-    }
-
-    init() {
-        // Pipeline setup after SwiftUI initializes
-        DispatchQueue.main.async { [self] in
-            if !showOnboarding {
-                pipeline.setup()
-            }
         }
     }
 }

@@ -18,6 +18,10 @@
     <string>0.1.0</string>
     <key>CFBundleExecutable</key>
     <string>VoiceType</string>
+    <key>CFBundleDisplayName</key>
+    <string>VoiceType</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
 </dict>

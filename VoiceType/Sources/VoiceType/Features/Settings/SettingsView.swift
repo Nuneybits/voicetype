@@ -10,11 +10,10 @@ struct SettingsView: View {
                 HStack {
                     Text("Dictation hotkey")
                     Spacer()
-                    Text("\u{2325}Space")
+                    Text("\u{2318}\u{21E7}Space")
                         .font(VTFont.mono())
                         .foregroundStyle(VTColors.textMuted)
                 }
-                Toggle("Launch at login", isOn: $settings.launchAtLogin)
                 Toggle("Sound effects", isOn: $settings.soundEnabled)
             }
 
@@ -34,15 +33,7 @@ struct SettingsView: View {
                     Text("Base (fast, less accurate)").tag("base")
                 }
 
-                Toggle("Auto-punctuation", isOn: $settings.autoPunctuation)
-
-                HStack {
-                    Text("Silence timeout")
-                    Slider(value: $settings.silenceTimeout, in: 1...5, step: 0.5)
-                    Text("\(settings.silenceTimeout, specifier: "%.1f")s")
-                        .font(VTFont.mono())
-                        .frame(width: 30)
-                }
+                Toggle("Live transcription preview", isOn: $settings.streamingMode)
             }
 
             Section("About") {

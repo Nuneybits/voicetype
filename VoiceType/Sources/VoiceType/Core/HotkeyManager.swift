@@ -2,78 +2,43 @@ import Foundation
 import HotKey
 import Carbon
 
-// MARK: - Press Type Detection
-
-enum PressType: Equatable {
-    case toggle
-    case hold
-}
-
-final class PressTypeDetector {
-    private var keyDownTime: Date?
-    private let holdThreshold: TimeInterval
-
-    init(holdThreshold: TimeInterval = 0.3) {
-        self.holdThreshold = holdThreshold
-    }
-
-    func keyDown() {
-        keyDownTime = Date()
-    }
-
-    func keyUp() -> PressType {
-        guard let downTime = keyDownTime else { return .toggle }
-        let duration = Date().timeIntervalSince(downTime)
-        keyDownTime = nil
-        return duration < holdThreshold ? .toggle : .hold
-    }
-}
-
-// MARK: - Hotkey Manager
-
 @MainActor
 final class HotkeyManager: ObservableObject {
-    private let detector = PressTypeDetector()
     private var hotKey: HotKey?
-    private var isToggleRecording = false
+    private var isRecording = false
 
     var onRecordingStart: (() -> Void)?
     var onRecordingStop: (() -> Void)?
 
     func setup() {
-        hotKey = HotKey(key: .space, modifiers: [.option])
+        hotKey = HotKey(key: .space, modifiers: [.command, .shift])
+        print("[VoiceType] Hotkey registered: Cmd+Shift+Space")
 
         hotKey?.keyDownHandler = { [weak self] in
             guard let self else { return }
-            self.detector.keyDown()
-            // Start recording immediately for hold-to-talk responsiveness
-            self.onRecordingStart?()
-        }
 
-        hotKey?.keyUpHandler = { [weak self] in
-            guard let self else { return }
-            let pressType = self.detector.keyUp()
-
-            switch pressType {
-            case .hold:
-                // Hold released — stop recording
-                self.isToggleRecording = false
+            if self.isRecording {
+                // Second press — stop recording and transcribe
+                print("[VoiceType] Hotkey: STOP recording")
+                self.isRecording = false
                 self.onRecordingStop?()
-            case .toggle:
-                if self.isToggleRecording {
-                    // Second tap — stop recording
-                    self.isToggleRecording = false
-                    self.onRecordingStop?()
-                } else {
-                    // First tap — recording already started on keyDown, mark toggle mode
-                    self.isToggleRecording = true
-                }
+            } else {
+                // First press — start recording
+                print("[VoiceType] Hotkey: START recording")
+                self.isRecording = true
+                self.onRecordingStart?()
             }
         }
+        // No keyUp handler needed for toggle mode
     }
 
     func teardown() {
         hotKey = nil
-        isToggleRecording = false
+        isRecording = false
+    }
+
+    /// Reset state if recording fails or is cancelled
+    func resetState() {
+        isRecording = false
     }
 }

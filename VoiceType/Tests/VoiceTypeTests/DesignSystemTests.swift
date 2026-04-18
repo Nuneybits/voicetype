@@ -1,17 +1,21 @@
 import Testing
+import SwiftUI
 @testable import VoiceType
 
 @Suite("Design System")
 struct DesignSystemTests {
     @Test("Colors are defined")
     func colorsDefined() {
-        #expect(VTColors.background != nil)
-        #expect(VTColors.surface != nil)
-        #expect(VTColors.textPrimary != nil)
-        #expect(VTColors.textMuted != nil)
-        #expect(VTColors.accent != nil)
-        #expect(VTColors.recording != nil)
-        #expect(VTColors.success != nil)
+        let colors: [Color] = [
+            VTColors.background,
+            VTColors.surface,
+            VTColors.textPrimary,
+            VTColors.textMuted,
+            VTColors.accent,
+            VTColors.recording,
+            VTColors.success,
+        ]
+        #expect(colors.count == 7)
     }
 
     @Test("Spacing scale is correct")

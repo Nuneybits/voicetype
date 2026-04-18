@@ -16,6 +16,9 @@ final class UserSettings: ObservableObject {
     @Published var soundEnabled: Bool {
         didSet { UserDefaults.standard.set(soundEnabled, forKey: "soundEnabled") }
     }
+    @Published var streamingMode: Bool {
+        didSet { UserDefaults.standard.set(streamingMode, forKey: "streamingMode") }
+    }
 
     init() {
         let defaults = UserDefaults.standard
@@ -24,5 +27,6 @@ final class UserSettings: ObservableObject {
         self.language = defaults.string(forKey: "language") ?? "en"
         self.silenceTimeout = defaults.object(forKey: "silenceTimeout") as? Double ?? 2.0
         self.soundEnabled = defaults.object(forKey: "soundEnabled") as? Bool ?? true
+        self.streamingMode = defaults.object(forKey: "streamingMode") as? Bool ?? false
     }
 }

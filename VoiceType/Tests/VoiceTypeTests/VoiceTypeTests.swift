@@ -4,6 +4,6 @@ import Testing
 struct VoiceTypeTests {
     @Test("Placeholder")
     func placeholder() {
-        #expect(true)
+        #expect(Bool(true))
     }
 }

@@ -12,6 +12,10 @@ final class TranscriptionEngine: ObservableObject {
     private let modelManager: ModelManager
     private let idleUnloadDelay: TimeInterval = 10
 
+    // Streaming
+    private var streamTranscriber: AudioStreamTranscriber?
+    private var streamingTask: Task<Void, Error>?
+
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
     }
@@ -25,6 +29,12 @@ final class TranscriptionEngine: ObservableObject {
             return
         }
 
+        let needsDownload = modelManager.localModelPath(for: modelManager.currentModelName) == nil
+        if needsDownload {
+            modelManager.isDownloading = true
+            print("[VoiceType] Downloading model '\(modelManager.currentModelName)'...")
+        }
+
         let config = WhisperKitConfig(
             model: modelManager.currentModelName,
             downloadBase: URL(fileURLWithPath: modelManager.storagePath),
@@ -34,9 +44,15 @@ final class TranscriptionEngine: ObservableObject {
 
         whisperKit = try await WhisperKit(config)
         isLoaded = true
+
+        if needsDownload {
+            modelManager.isDownloading = false
+            modelManager.isModelReady = true
+            print("[VoiceType] Model ready.")
+        }
     }
 
-    /// Transcribe audio samples (16kHz mono Float32).
+    /// Transcribe audio samples (16kHz mono Float32) — batch mode.
     func transcribe(audioSamples: [Float]) async throws -> String {
         if !isLoaded {
             try await loadModel()
@@ -57,6 +73,67 @@ final class TranscriptionEngine: ObservableObject {
             .joined(separator: " ")
 
         return text
+    }
+
+    // MARK: - Streaming
+
+    /// Start real-time streaming transcription. The callback fires on the AudioStreamTranscriber actor
+    /// context — callers must dispatch UI updates to @MainActor.
+    func startStreaming(
+        language: String = "en",
+        onStateChange: @escaping @Sendable (AudioStreamTranscriber.State, AudioStreamTranscriber.State) -> Void
+    ) async throws {
+        if !isLoaded {
+            try await loadModel()
+        }
+
+        guard let whisperKit, let tokenizer = whisperKit.tokenizer else {
+            throw TranscriptionError.modelNotLoaded
+        }
+
+        // Cancel idle unload while streaming
+        unloadTask?.cancel()
+        isTranscribing = true
+
+        let options = DecodingOptions(
+            language: language == "auto" ? nil : language
+        )
+
+        let transcriber = AudioStreamTranscriber(
+            audioEncoder: whisperKit.audioEncoder,
+            featureExtractor: whisperKit.featureExtractor,
+            segmentSeeker: whisperKit.segmentSeeker,
+            textDecoder: whisperKit.textDecoder,
+            tokenizer: tokenizer,
+            audioProcessor: whisperKit.audioProcessor,
+            decodingOptions: options,
+            requiredSegmentsForConfirmation: 2,
+            silenceThreshold: 0.3,
+            useVAD: true,
+            stateChangeCallback: onStateChange
+        )
+
+        streamTranscriber = transcriber
+
+        // Must run in detached task — startStreamTranscription() blocks until stopped
+        streamingTask = Task.detached {
+            try await transcriber.startStreamTranscription()
+        }
+
+        print("[VoiceType] Streaming transcription started.")
+    }
+
+    /// Stop streaming transcription.
+    func stopStreaming() async {
+        if let transcriber = streamTranscriber {
+            await transcriber.stopStreamTranscription()
+        }
+        streamingTask?.cancel()
+        streamingTask = nil
+        streamTranscriber = nil
+        isTranscribing = false
+        scheduleUnload()
+        print("[VoiceType] Streaming transcription stopped.")
     }
 
     /// Schedule model unload after idle period to free memory.
