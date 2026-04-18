@@ -46,6 +46,8 @@ Before you publish, make sure you have:
 - 2 screenshots of the app
 - a short release note for `v0.1`
 
+Also make sure your public instructions explain the first-launch macOS warning clearly if the app is not yet notarized.
+
 ## Step-By-Step: How To Make It Public
 
 ### 1. Create the GitHub repository
@@ -102,6 +104,32 @@ The best framing is:
 - it is useful now
 
 Then mention future features separately under "Coming Soon."
+
+## DMG Or App File?
+
+Use a `.dmg`.
+
+Why:
+
+- it is the normal Mac installation format
+- it gives people a drag-to-Applications workflow
+- it keeps the install experience tidy
+
+The macOS warning is not caused by the DMG itself. That warning happens because the app has not yet gone through Apple's full signing and notarization process.
+
+If you shipped the `.app` by itself, users could still see the same warning.
+
+## Recommended Install Instructions
+
+Use a short version anywhere you link the download:
+
+1. Download the DMG
+2. Open it
+3. Drag VoiceType into Applications
+4. In Applications, Control-click VoiceType and choose Open
+5. Click Open again
+
+After the first launch, VoiceType should open normally.
 
 ## Best Next Upgrade After Launch
 

@@ -60,7 +60,29 @@ After downloading:
 2. Drag `VoiceType.app` into the `Applications` folder.
 3. Open `Applications` and launch VoiceType.
 
-If macOS warns you because the app is from the internet, open `System Settings` and allow the app to run. For a first public release, this is normal unless the app has been fully signed and notarized for Apple distribution.
+If macOS warns you because the app is from the internet, that is expected for this early release. The warning is caused by Apple security checks on unsigned or not-yet-notarized apps, not by the DMG itself.
+
+To open it:
+
+1. In `Applications`, hold `Control` and click `VoiceType.app`
+2. Choose `Open`
+3. Click `Open` again in the confirmation dialog
+
+If needed, you can also go to `System Settings > Privacy & Security` and choose `Open Anyway`.
+
+## Install Notes
+
+For most people, the correct install flow is:
+
+1. Download the latest `.dmg`
+2. Open it
+3. Drag `VoiceType.app` into `Applications`
+4. Open `Applications`
+5. Control-click `VoiceType`
+6. Choose `Open`
+7. Click `Open` again
+
+After the first successful launch, you should be able to open the app normally.
 
 ## Install From Source
 
