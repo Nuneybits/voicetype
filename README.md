@@ -1,36 +1,54 @@
 # VoiceType
 
-VoiceType is a local voice-to-text app for Mac.
+A local voice-to-text app for Mac built for writers, journalists, and anyone who thinks better out loud.
 
-It is built for writers, journalists, researchers, founders, and anyone who sometimes thinks more clearly out loud than at a keyboard. Press record, speak naturally, and VoiceType turns your words into text on your computer without sending your audio to a remote server.
+![VoiceType demo](docs/images/voicetype-demo.gif)
 
-This first public release is intentionally focused. VoiceType `v0.1` is a fast, lightweight dictation tool with a floating capture pad. It is designed to be simple, private, and useful from the first minute.
+VoiceType is a lightweight dictation app for macOS that turns speech into text locally on your machine. It is designed for drafting notes, outlines, articles, and long thoughts with minimal friction. Press record, speak naturally, and turn rough ideas into text without sending your audio to a remote server.
 
-## What VoiceType Is For
+## Highlights
 
-VoiceType helps you:
+- Local speech-to-text for Mac
+- Built for writers, journalists, and fast thinkers
+- Lightweight floating capture pad
+- Live transcription preview
+- Privacy-first workflow
+- Simple menu bar app with a global hotkey
 
-- draft articles, notes, outlines, and memos by speaking
-- capture long thoughts before they disappear
-- reduce the friction of typing when you would rather talk
-- keep control of your audio and transcripts on your own machine
+## Screenshots
 
-In plain English: it is a writing tool for people who want speech-to-text to feel fast, clean, and calm.
+### Ready to dictate
+![VoiceType empty state](docs/images/voicetype-empty-state.png)
 
-## Why This Exists
+### Recording in progress
+![VoiceType recording](docs/images/voicetype-recording.png)
 
-There are already dictation tools on the market, but many of them are expensive, cloud-dependent, or overloaded with features. VoiceType takes a different approach.
+### Finished transcript
+![VoiceType transcript](docs/images/voicetype-transcript.png)
 
-It is:
+## Download
 
-- native to macOS
-- local-first and privacy-respecting
-- built to feel lightweight instead of bloated
-- shaped by a writer's workflow, not just an engineer's demo
+The simplest way to get VoiceType is to download the latest `.dmg` from GitHub Releases.
 
-## What Ships In v0.1
+## Install VoiceType
 
-VoiceType `v0.1` includes:
+1. Download the latest `.dmg`
+2. Open it
+3. Drag `VoiceType.app` into the `Applications` folder
+4. Try opening VoiceType from `Applications`
+5. If macOS blocks it, go to `System Settings > Privacy & Security`
+6. Click `Open Anyway`
+7. Return to `Applications` and open VoiceType again
+
+`INSTALL FIRST.txt` is included inside the DMG for quick setup guidance.
+
+## Why VoiceType Exists
+
+There are already dictation tools on the market, but many of them are expensive, cloud-dependent, or overloaded with features. VoiceType takes a different approach: it is native to macOS, local-first, lightweight, and shaped by a writer’s workflow rather than a generic productivity stack.
+
+## What Ships In v0.1.2
+
+VoiceType currently includes:
 
 - local transcription on macOS using WhisperKit
 - a menu bar app that stays out of the way until you need it
@@ -38,90 +56,16 @@ VoiceType `v0.1` includes:
 - a global hotkey: `Command + Shift + Space`
 - optional live transcription preview while you speak
 - session word count and recent transcription history
-- a shareable `.app` and `.dmg` for installation
 
 ## Coming Soon
 
-Planned future improvements include:
+Planned improvements include:
 
 - direct insertion into the app you are actively using
 - cleanup modes for raw, clean, and polished transcription
 - better export workflows for writers and journalists
 - longer-session handling beyond the current in-memory limit
-- launch-at-login and additional desktop polish
-
-## Download
-
-The simplest way to get VoiceType is to download the latest `.dmg` from GitHub Releases.
-
-After downloading:
-
-1. Open the `.dmg` file.
-2. Read `INSTALL FIRST.txt` if you want the shortest explanation of the macOS warning.
-3. Drag `VoiceType.app` into the `Applications` folder.
-4. Open `Applications` and launch VoiceType.
-
-If macOS warns you because the app is from the internet, that is expected for this early release. The warning is caused by Apple security checks on unsigned or not-yet-notarized apps, not by the DMG itself.
-
-First try this:
-
-1. In `Applications`, hold `Control` and click `VoiceType.app`
-2. Choose `Open`
-3. Click `Open` again in the confirmation dialog
-
-If macOS still blocks the app:
-
-1. Open `System Settings`
-2. Go to `Privacy & Security`
-3. Scroll to the `Security` section
-4. Click `Open Anyway`
-5. Return to `Applications` and open VoiceType again
-
-You may need to try opening the app once before the `Open Anyway` button appears.
-
-## Install Notes
-
-For most people, the correct install flow is:
-
-1. Download the latest `.dmg`
-2. Open it
-3. Drag `VoiceType.app` into `Applications`
-4. Open `Applications`
-5. Control-click `VoiceType`
-6. Choose `Open`
-7. If macOS still blocks the app, go to `System Settings > Privacy & Security`
-8. Click `Open Anyway`
-9. Return to `Applications` and open VoiceType again
-
-After the first successful launch, you should be able to open the app normally.
-
-## Install From Source
-
-If you want to build VoiceType yourself, you will need:
-
-- macOS 14 or newer
-- Xcode / Swift toolchain
-
-Then run:
-
-```bash
-git clone https://github.com/voicetype/voicetype.git
-cd voicetype
-make build
-make run
-```
-
-To create a distributable app bundle:
-
-```bash
-make bundle
-```
-
-To create a distributable DMG:
-
-```bash
-make dmg
-```
+- additional onboarding and desktop polish
 
 ## How To Use VoiceType
 
@@ -148,7 +92,7 @@ Future versions that insert text directly into other apps may also require:
 
 ## Product Scope
 
-VoiceType `v0.1` is a polished local dictation pad.
+VoiceType `v0.1.x` is a polished local dictation pad.
 
 It does **not** yet try to automatically insert text into every app on your Mac. That feature may come later. For now, the goal is reliability, privacy, and a clean experience for recording and copying text.
 
